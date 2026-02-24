@@ -1,0 +1,12 @@
+import { Router } from 'express';
+import protect from '../middleware/auth.js';
+import validate from '../middleware/validate.js';
+import { reviewSchema } from '../models/reviewModel.js';
+import reviewController from '../controllers/reviewController.js';
+const router = Router();
+router.get('/', protect, reviewController.getAll);
+router.get('/:id', protect, reviewController.get);
+router.post('/', protect, validate(reviewSchema), reviewController.create);
+router.put('/:id', protect, validate(reviewSchema), reviewController.update);
+router.delete('/:id', protect, reviewController.delete);
+export default router;
